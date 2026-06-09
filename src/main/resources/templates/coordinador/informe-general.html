@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Informe General - Saber Pro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: linear-gradient(135deg, #0d6efd, #000); color: white; min-height: 100vh; }
+        .card { background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); }
+        .table { background: rgba(255,255,255,0.95); color: black; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/dashboard">SABER PRO</a>
+            <a href="/logout" class="btn btn-outline-light">Cerrar Sesión</a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="card p-4">
+            <h2 class="mb-4">Informe General de Alumnos</h2>
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Documento</th>
+                        <th>Nombre</th>
+                        <th>Programa</th>
+                        <th>Semestre</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="est : ${estudiantes}">
+                        <td th:text="${est.documento}"></td>
+                        <td th:text="${est.nombreCompleto}"></td>
+                        <td th:text="${est.programa}"></td>
+                        <td th:text="${est.semestre}"></td>
+                        <td>
+                            <span class="badge bg-success" th:if="${est.aprobadoSaberPro}">Aprobado</span>
+                            <span class="badge bg-warning" th:unless="${est.aprobadoSaberPro}">Pendiente</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <a href="/dashboard" class="btn btn-secondary">← Volver al Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>
